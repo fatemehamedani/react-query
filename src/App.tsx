@@ -1,12 +1,7 @@
-
-import './App.css'
-import TodoList from './Components/TodoList'
-
+import "./App.css";
+import TodoList from "./react-query/TodoList";
 function App() {
-  return (
-      <TodoList/>
- 
-  )
+  return <TodoList />;
 }
 
-export default App
+export default App;
