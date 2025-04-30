@@ -1,7 +1,9 @@
+import { useState } from "react";
 import usePosts from "./hooks/usePosts";
 
 const PostList = () => {
-  const { data, error, isLoading } = usePosts();
+ const [userId , setUserId] = useState<number>()
+  const { data, error, isLoading } = usePosts(userId);
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -15,10 +17,12 @@ const PostList = () => {
           className="block mb-2 text-sm font-medium text-gray-800 dark:text-white"
         ></label>
         <select
+          onChange={(event) => setUserId(parseInt(event.target.value))}
+          value={userId}
           id="user"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
-          <option value="">choose user</option>
+          <option selected>choose user</option>
           <option value="1">user1</option>
           <option value="2">user2</option>
           <option value="3">user3</option>
