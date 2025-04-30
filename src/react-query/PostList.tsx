@@ -2,8 +2,9 @@ import { useState } from "react";
 import usePosts from "./hooks/usePosts";
 
 const PostList = () => {
- const [userId , setUserId] = useState<number>()
-  const { data, error, isLoading } = usePosts(userId);
+  const pageSize = 10;
+  const [page, setPage] = useState(1);
+  const { data, error, isLoading } = usePosts({ page, pageSize });
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -11,29 +12,26 @@ const PostList = () => {
 
   return (
     <>
-      <form className="max-w-sm mx-auto">
-        <label
-          htmlFor="user"
-          className="block mb-2 text-sm font-medium text-gray-800 dark:text-white"
-        ></label>
-        <select
-          onChange={(event) => setUserId(parseInt(event.target.value))}
-          value={userId}
-          id="user"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        >
-          <option selected>choose user</option>
-          <option value="1">user1</option>
-          <option value="2">user2</option>
-          <option value="3">user3</option>
-        </select>
-      </form>
-
-      <ul>
+      <ul className=" flex flex-col-reverse divide-y-4 divide-y-reverse divide-gray-500  ml-2">
         {data?.map((post) => (
           <li key={post.id}>{post.title}</li>
         ))}
       </ul>
+      <button
+        disabled={page === 1}
+        type="button"
+        className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ml-1"
+        onClick={() => setPage(page - 1)}
+      >
+        Previous
+      </button>
+      <button
+        type="button"
+        className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+        onClick={() => setPage(page + 1)}
+      >
+        Next
+      </button>
     </>
   );
 };
