@@ -8,7 +8,7 @@ const TodoList = () => {
   if (error) return <p>{error?.message}</p>;
 
   return (
-    <ul>
+    <ul className="ml-1.5 divide-y-2 divide-gray-400">
       {todos?.map((todo) => (
         <li key={todo.id}>{todo.title}</li>
       ))}
