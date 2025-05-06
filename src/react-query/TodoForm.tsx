@@ -2,14 +2,11 @@ import { useRef } from "react";
 
 import useAddTodo from "./hooks/useAddTodo";
 
-
-
 const TodoForm = () => {
-  
   const ref = useRef<HTMLInputElement>(null);
- const addTodo = useAddTodo(() => {
-      if (ref.current) ref.current.value = "";
-  })
+  const addTodo = useAddTodo(() => {
+    if (ref.current) ref.current.value = "";
+  });
 
   return (
     <>
@@ -51,7 +48,7 @@ const TodoForm = () => {
               type="submit"
               className="text-white bg-pink-400 hover:bg-pink-700 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
-              {addTodo.isPending ? "Loading..." : "Add"}
+              Add
             </button>
           </div>
         </div>
